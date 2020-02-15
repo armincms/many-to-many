@@ -1,4 +1,4 @@
-# BelongsToMany
+# ManyToMany
 A Laravel Nova field for polymorphic and non-polymorphic `ManyToMany` relationships.
 
 ##### Table of Contents   
@@ -18,7 +18,7 @@ A Laravel Nova field for polymorphic and non-polymorphic `ManyToMany` relationsh
 
 ## Install
 ```bash
-composer require armincms/belongs-to-many
+composer require armincms/many-to-many
 ``` 
   
 ## Simple Usage  
