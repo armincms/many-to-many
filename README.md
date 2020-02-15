@@ -113,4 +113,63 @@ You can use the `duplicate` feature for repetitively attach a resource to anothe
 
 ```
 ## Polymorphic Relation
-Using for the polymorphic relationships is like non-polymorphic.
+Using for the polymorphic relationships is like non-polymorphic. follow the example:
+
+
+```  
+  use Armincms\Fields\MorphToMany;  
+  
+
+  
+  /**
+   * Get the fields displayed by the resource.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return array
+   */
+  public function fields(Request $request)
+  {
+    return [
+      MorphToMany::make(__("Label"), 'relationName', RelatedResource::class)
+          ->fields(function() {
+              return [
+                  Text::make('Price')
+                          ->rules('required', 'numeric'),   
+              ];
+          })
+          ->duplicate()
+          ->pivots(),
+    ];
+  }
+
+```
+
+or
+
+```  
+  use Armincms\Fields\MorphedByMany;  
+  
+
+  
+  /**
+   * Get the fields displayed by the resource.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return array
+   */
+  public function fields(Request $request)
+  {
+    return [
+      MorphedByMany::make(__("Label"), 'relationName', RelatedResource::class)
+          ->fields(function() {
+              return [
+                  Text::make('Price')
+                          ->rules('required', 'numeric'),   
+              ];
+          })
+          ->duplicate()
+          ->pivots(),
+    ];
+  }
+
+```
