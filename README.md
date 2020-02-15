@@ -1,5 +1,5 @@
 # BelongsToMany
-A Laravel Nova field for `simple` and `polymorphic` `ManyToMany` relationships.
+A Laravel Nova field for polymorphic and non-polymorphic `ManyToMany` relationships.
 
 ##### Table of Contents   
 * [Features](#features)      

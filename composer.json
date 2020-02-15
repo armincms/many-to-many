@@ -1,9 +1,10 @@
 {
-    "name": "armincms/belongs-to-many",
+    "name": "armincms/many-to-many",
     "description": "A Laravel Nova field.",
     "keywords": [
         "laravel",
-        "nova"
+        "nova",
+        "armincms"
     ],
     "license": "MIT",
     "require": {
