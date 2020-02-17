@@ -8,7 +8,7 @@ use Laravel\Nova\Fields\FieldCollection;
 use Laravel\Nova\Contracts\ListableField;
 use Laravel\Nova\Contracts\Resolvable;
 use Laravel\Nova\ResourceToolElement;
-use Armincms\Fields\BelongsToMany; 
+use Armincms\Fields\ManyToMany; 
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Nova;
 
@@ -118,7 +118,7 @@ trait ResolvesFields
     public function relatedFieldFor(NovaRequest $request, $resource, $relatedResource)
     {
         return $resource->availableFields($request)
-                        ->whereInstanceOf(BelongsToMany::class)
+                        ->whereInstanceOf(ManyToMany::class)
                         ->where('resourceName', $relatedResource)
                         ->first();
     }  

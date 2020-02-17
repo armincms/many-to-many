@@ -4,7 +4,7 @@ namespace Armincms\Fields;
  
 use Laravel\Nova\Fields\Select;  
 
-class MorphToMany extends BelongsToMany
+class MorphToMany extends ManyToMany
 {    
     /**
      * Create a new field.

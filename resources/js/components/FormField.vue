@@ -208,8 +208,30 @@ export default {
       /**
        * Fill the given FormData object with the field's internal value.
        */
-      fill(formData) {  
-        formData.append(this.field.attribute, JSON.stringify(this.fillResources))
+      fill(formData) {    
+        this.appendToForm(this.fillResources, formData, this.field.attribute)   
+      },
+
+      appendToForm(object, formData, prefix) {   
+        for (var key in object) {
+          if(object[key] instanceof FormData) { 
+            this.mergeFormData(object[key], formData, prefix + this.wrap(key)) 
+          } else if("object" == typeof object[key]) { 
+            this.appendToForm(object[key], formData, prefix + this.wrap(key)) 
+          } else { 
+            formData.append(prefix + this.wrap(key), object[key])
+          } 
+        }  
+      },
+
+      mergeFormData(formData, mergeForm, prefix) {
+        for (var pair of formData.entries()) { 
+          mergeForm.append(prefix + this.wrap(pair[0]), pair[1])
+        }  
+      },
+
+      wrap(key) {
+        return key.replace(/^([^\[]+)/, matches => "[" +matches+ "]");
       },
 
       /**
@@ -265,10 +287,11 @@ export default {
           await this.resetCallbak() 
 
           index = typeof index == 'number' ? index : this.attachedResources.length - 1
-
-          this.$set(
-            this.attachedResources, index, this.attachPivots(this.attachedResources[index])
-          ) 
+ 
+          this.attachedResources[index] = _.tap(this.attachedResources[index], tag => {
+            tag.pivots = this.attachmentFormData
+            tag.attached = false 
+          })   
 
           this.processingModal = false;  
         } 
