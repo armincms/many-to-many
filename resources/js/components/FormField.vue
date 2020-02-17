@@ -359,17 +359,7 @@ export default {
         this.$emit('close')
 
         this.resetCallbak()
-      },  
-
-      attachPivots(tag) {
-        for(var pair of this.attachmentFormData.entries()) {
-          tag[pair[0]] = pair[1] 
-        }
-
-        tag.attached = false
-
-        return tag;
-      },
+      },   
 
       /**
        * Get all of the available resources for the current search / trashed state.
