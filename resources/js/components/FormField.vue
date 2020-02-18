@@ -173,6 +173,7 @@ export default {
         return { 
           tag: '',
           attachedResources: [], 
+          pivots: [], 
           fields: [], 
           search: '', 
           loading: false, 
@@ -208,14 +209,14 @@ export default {
       /**
        * Fill the given FormData object with the field's internal value.
        */
-      fill(formData) {    
+      fill(formData) {     
         this.appendToForm(this.fillResources, formData, this.field.attribute)   
       },
 
       appendToForm(object, formData, prefix) {   
         for (var key in object) {
-          if(object[key] instanceof FormData) { 
-            this.mergeFormData(object[key], formData, prefix + this.wrap(key)) 
+          if(key == 'pivotAccessor') { 
+            this.mergeFormData(this.pivots[object[key]], formData, prefix + this.wrap('pivots')) 
           } else if("object" == typeof object[key]) { 
             this.appendToForm(object[key], formData, prefix + this.wrap(key)) 
           } else { 
@@ -225,7 +226,7 @@ export default {
       },
 
       mergeFormData(formData, mergeForm, prefix) {
-        for (var pair of formData.entries()) { 
+        for (var pair of formData.entries()) {  
           mergeForm.append(prefix + this.wrap(pair[0]), pair[1])
         }  
       },
@@ -286,12 +287,14 @@ export default {
 
           await this.resetCallbak() 
 
-          index = typeof index == 'number' ? index : this.attachedResources.length - 1
- 
-          this.attachedResources[index] = _.tap(this.attachedResources[index], tag => {
-            tag.pivots = this.attachmentFormData
-            tag.attached = false 
-          })   
+          index = typeof index == 'number' ? index : this.attachedResources.length - 1 
+
+          this.pivots[index] = this.attachmentFormData
+
+          this.$set(this.attachedResources, index, _.tap(this.attachedResources[index], tag => {
+            tag.attached = false
+            tag.pivotAccessor = index
+          })) 
 
           this.processingModal = false;  
         } 
@@ -427,8 +430,12 @@ export default {
             _.each(this.fields, field => {
               field.fill = () => ''  
 
-              if(resource.hasOwnProperty(field.attribute)) {
-                field.value = resource[field.attribute]
+              var pivots = this.pivots[resource.pivotAccessor] 
+                              ? this.pivots[resource.pivotAccessor] 
+                              : new FormData
+
+              if(pivots.has(field.attribute)) {
+                field.value = pivots.getAll(field.attribute)
               } 
             })
           }) 

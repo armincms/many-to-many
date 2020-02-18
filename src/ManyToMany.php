@@ -110,6 +110,10 @@ abstract class ManyToMany extends Field
         $this->fieldsCallback = function () {
             return [];
         };        
+
+        $this->fillCallback = function ($pivots) {
+            return (array) $pivots;
+        };        
     } 
 
     /**
@@ -179,19 +183,19 @@ abstract class ManyToMany extends Field
                 $detaching = $this->mergeDetachments($model, $authorized); 
 
                 $relationship->wherePivotIn('id', $detaching->pluck('pivotId')->all())
-                            ->detach($detaching->pluck('id')->all());  
+                            ->detach($detaching->pluck('id')->all());
 
                 if(! $this->duplicate) { 
                     $attaching = $this->removeDuplicateAttachments($model, $attaching)
                                         ->keyBy('id')
-                                        ->map([$this, 'applyFillUsing']) 
+                                        ->map([$this, 'fetchPivotValues']) 
                                         ->all();
 
                     $relationship->syncWithoutDetaching($attaching);
                 } else {
                     $attaching->each(function($attachment) use ($relationship) { 
                         $relationship->attach(
-                            $attachment['id'], $this->applyFillUsing($attachment)
+                            $attachment['id'], $this->fetchPivotValues($attachment)
                         );
                     }); 
                 }  
@@ -290,20 +294,16 @@ abstract class ManyToMany extends Field
     }
 
     /**
-     * Apply the fillCalback into attachment pivots
+     * Apply the fillCalback into attachment pivots and fetch them.
      * 
      * @param  array $attachment 
      * @return array             
      */
-    public function applyFillUsing($attachment)
-    {
-        if(isset($this->fillCallback)) {
-            $attachment['pivots'] = (array) call_user_func(
-                $this->fillCallback, $attachment['pivots'] ?? [], $attachment['id']
-            ); 
-        }
-
-        return $attachment['pivots'] ?? []; 
+    public function fetchPivotValues($attachment)
+    { 
+        return (array) call_user_func(
+            $this->fillCallback, $attachment['pivots'] ?? [], $attachment['id']
+        ); 
     } 
 
     /**
