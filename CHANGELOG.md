@@ -1,4 +1,4 @@
-version 0.1.0 (2020-02-18)
+version 0.2.0 (2020-02-18)
 -----------------------------  
 ### Added:
 	- Handled `fillUsing` for pivot fields. 
