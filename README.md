@@ -8,6 +8,7 @@ A Laravel Nova field for polymorphic and non-polymorphic `ManyToMany` relationsh
 * [Pivots](#pivots)          
 * [Duplicate Attachment](#duplicate-attachment)          
 * [Polymorphic Relation](#polymorphic-relation)          
+* [Fill Using](#fill-using)          
 
 
 ## Features
@@ -172,4 +173,18 @@ or
     ];
   }
 
+```
+
+## Fill Using
+You can use `fillUsing` to change the pivot-columns values; Then you need to return an associative array that matches your pivot table.
+Be careful; the "fillUsing" method applies to each attachment. see the following example:
+
+```
+  ->fillUsing(function($pivots) {
+      if(isset($pivots['options']) && is_array($pivots['options'])) {
+          $pivots['options'] = json_encode($pivots['options']);
+      }
+
+      return $pivots;
+  }), 
 ```
