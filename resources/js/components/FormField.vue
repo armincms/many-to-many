@@ -210,7 +210,11 @@ export default {
        * Fill the given FormData object with the field's internal value.
        */
       fill(formData) {     
-        this.appendToForm(this.fillResources, formData, this.field.attribute)   
+        if(this.fillResources.length == 0) {
+          formData.append(this.field.attribute, this.fillResources)
+        } else {
+          this.appendToForm(this.fillResources, formData, this.field.attribute)  
+        } 
       },
 
       appendToForm(object, formData, prefix) {   
