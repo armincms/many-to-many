@@ -5,6 +5,7 @@ A Laravel Nova field for polymorphic and non-polymorphic `ManyToMany` relationsh
 * [Features](#features)      
 * [Install](#install)      
 * [Simple Usage](#simple-usage)        
+* [Searching](#searching)               
 * [Pivots](#pivots)          
 * [Duplicate Attachment](#duplicate-attachment)          
 * [Polymorphic Relation](#polymorphic-relation)          
@@ -50,6 +51,10 @@ composer require armincms/many-to-many
   }
 
 ```
+
+
+## Searching 
+To search relation value instead of select it; you can use the `searchable` method on the field.
 
 ## Pivots 
 For customizing the pivot columns when attaching a resource you can use the `pivots` method of the field. then define your custom pivot fields with the `fields` method. now, when attaching a resource; a Modal that contains the pivot fields will be displayed to you.
