@@ -436,6 +436,16 @@ abstract class ManyToMany extends Field
     }
 
     /**
+     * Determine if the field should be searchable.
+     *
+     * @return $this
+     */
+    public function searchable(bool $searchable = true)
+    {
+        return $this->withMeta(compact('searchable'));
+    }
+
+    /**
      * Prepare the field for JSON serialization.
      *
      * @return array
