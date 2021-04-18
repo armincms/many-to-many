@@ -466,8 +466,7 @@ export default {
     },
 
     computed: {  
-      filteredResources() {   
-        console.log(this.availableResources)
+      filteredResources() {    
         return this.availableResources.filter(item => { 
           return this.tag.length === 0 || item.text.match(this.tag);
         });
