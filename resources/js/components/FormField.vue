@@ -13,6 +13,7 @@
         :is-duplicate="isDuplicate"
         :autocomplete-items="filteredResources"
         :avoid-adding-duplicates="! field.duplicate" 
+        @input="performSearch"
         @before-adding-tag="addingTag"  
         @before-editing-tag="editingTag"  
         @tags-changed="tags => attachedResources = tags"
@@ -193,8 +194,11 @@ export default {
         }
     },
 
-    created() {
-      this.getAvailableResources(); 
+    created() { 
+      if (! this.field.searchable) {
+        this.getAvailableResources(); 
+      }
+      
       this.getAttachedResources(); 
     },
 
@@ -215,6 +219,18 @@ export default {
         } else {
           this.appendToForm(this.fillResources, formData, this.field.attribute)  
         } 
+      },
+
+      performSearch(search) { 
+        if (! this.field.searchable) return
+
+        this.search = search; 
+
+        setTimeout(()  => {
+          if (this.search == search && this.search.length > 0) { 
+            this.getAvailableResources()
+          } 
+        }, 500)
       },
 
       appendToForm(object, formData, prefix) {   
@@ -325,7 +341,8 @@ export default {
             `/nova-api/armincms/${this.resourceName}/pivots-validate/${this.field.resourceName}`,
             this.attachmentFormData,
             {
-              params: { 
+              params: {
+                field: this.field.attribute, 
                 resourceId: this.resourceId,
                 relatedId: this.processingResource.id, 
                 editing: true,
@@ -371,13 +388,14 @@ export default {
       /**
        * Get all of the available resources for the current search / trashed state.
        */
-      getAvailableResources(search = '') { 
+      getAvailableResources() { 
         Nova.request()
           .get(
             `/nova-api/armincms/${this.resourceName}/attachable/${this.field.resourceName}`,
             {
               params: {
-                search,
+                search: this.search,
+                field: this.field.attribute,
                 resourceId: this.resourceId,
                 withTrashed: this.field.withTrashed,
               },
@@ -389,13 +407,13 @@ export default {
       /**
        * Get all of the available resources for the current search / trashed state.
        */
-      getAttachedResources(search = '') { 
+      getAttachedResources() { 
         Nova.request()
           .get(
             `/nova-api/armincms/${this.resourceName}/attached/${this.field.resourceName}`,
             {
               params: {
-                search,
+                field: this.field.attribute,
                 resourceId: this.resourceId,
                 withTrashed: this.field.withTrashed,
               },
@@ -419,7 +437,8 @@ export default {
           .get(
             `/nova-api/armincms/${this.resourceName}/pivot-fields/${this.field.resourceName}`,
             {
-              params: { 
+              params: {
+                field: this.field.attribute, 
                 resourceId: this.resourceId,
                 relatedId: this.processingResource.id, 
                 pivotId: this.processingResource.pivotId, 
@@ -448,6 +467,7 @@ export default {
 
     computed: {  
       filteredResources() {   
+        console.log(this.availableResources)
         return this.availableResources.filter(item => { 
           return this.tag.length === 0 || item.text.match(this.tag);
         });
