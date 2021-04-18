@@ -112,14 +112,14 @@ trait ResolvesFields
      * Get the pivot fields for the resource and relation.
      *
      * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
-     * @param  string  $relatedResource
+     * @param  string  $attribute
      * @return \Laravel\Nova\Fields\FieldCollection
      */
-    public function relatedFieldFor(NovaRequest $request, $resource, $relatedResource)
+    public function relatedFieldFor(NovaRequest $request, $resource, $attribute)
     {
         return $resource->availableFields($request)
                         ->whereInstanceOf(ManyToMany::class)
-                        ->where('resourceName', $relatedResource)
+                        ->where('attribute', $attribute)
                         ->first();
     }  
 
