@@ -368,7 +368,7 @@ abstract class ManyToMany extends Field
     {
         return array_filter([
             'avatar'    => $resource->resolveAvatarUrl($request),
-            'text'      => $this->formatDisplayValue($resource),
+            'text'      => strval($this->formatDisplayValue($resource)),
             'id'        => $resource->getKey(),
             'attached'  => $attached,
         ]);
