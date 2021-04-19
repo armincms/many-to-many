@@ -226,11 +226,11 @@ export default {
 
         this.search = search; 
 
-        setTimeout(()  => {
-          if (this.search == search && this.search.length > 0) { 
+        _.debounce(()  => {
+          if (this.search == search && this.search.length > 0) {
             this.getAvailableResources()
-          } 
-        }, 500)
+          }
+        }, Nova.config.debounce)()
       },
 
       appendToForm(object, formData, prefix) {   
