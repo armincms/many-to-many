@@ -22,7 +22,7 @@
           <span @click="performEditTag(props)">
             {{ props.tag.text }}
 
-            <svg
+            <!-- <svg
               v-if="field.pivots"
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -47,7 +47,7 @@
                 height="261.554"
                 transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 141.551 432.7058)"
               />
-            </svg>
+            </svg> -->
           </span>
         </template>
       </vue-tags-input>

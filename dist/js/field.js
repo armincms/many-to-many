@@ -2871,54 +2871,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 
 var _hoisted_1 = ["onClick"];
-var _hoisted_2 = {
-  key: 0,
-  xmlns: "http://www.w3.org/2000/svg",
-  "xmlns:xlink": "http://www.w3.org/1999/xlink",
-  viewBox: "0 0 347 347",
-  width: "15px",
-  style: {
-    "cursor": "pointer"
-  }
-};
-
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("polygon", {
-  fill: "#fff",
-  points: "284.212,0 231.967,51.722 295.706,115.461 347.429,63.216"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("polygon", {
-  fill: "#fff",
-  points: "0,347.429 85.682,319.216 28.212,261.747"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("rect", {
-  fill: "#fff",
-  x: "115.322",
-  y: "56.259",
-  width: "90.14",
-  height: "261.554",
-  transform: "matrix(-0.7071 -0.7071 0.7071 -0.7071 141.551 432.7058)"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_6 = [_hoisted_3, _hoisted_4, _hoisted_5];
-var _hoisted_7 = ["name", "id"];
-var _hoisted_8 = {
+var _hoisted_2 = ["name", "id"];
+var _hoisted_3 = {
   "class": "text-80 px-8 my-1"
 };
-var _hoisted_9 = {
+var _hoisted_4 = {
   "class": "px-6 py-3 flex"
 };
-var _hoisted_10 = {
+var _hoisted_5 = {
   "class": "flex items-center ml-auto"
 };
-var _hoisted_11 = ["disabled", "processing", "form"];
+var _hoisted_6 = ["disabled", "processing", "form"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_vue_tags_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("vue-tags-input");
 
@@ -2964,9 +2927,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             onClick: function onClick($event) {
               return $options.performEditTag(props);
             }
-          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(props.tag.text) + " ", 1
+          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(props.tag.text), 1
           /* TEXT */
-          ), $props.field.pivots ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", _hoisted_2, _hoisted_6)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 8
+          ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <svg\r\n              v-if=\"field.pivots\"\r\n              xmlns=\"http://www.w3.org/2000/svg\"\r\n              xmlns:xlink=\"http://www.w3.org/1999/xlink\"\r\n              viewBox=\"0 0 347 347\"\r\n              width=\"15px\"\r\n              style=\"cursor: pointer\"\r\n            >\r\n              <polygon\r\n                fill=\"#fff\"\r\n                points=\"284.212,0 231.967,51.722 295.706,115.461 347.429,63.216\"\r\n              />\r\n              <polygon\r\n                fill=\"#fff\"\r\n                points=\"0,347.429 85.682,319.216 28.212,261.747\"\r\n              />\r\n\r\n              <rect\r\n                fill=\"#fff\"\r\n                x=\"115.322\"\r\n                y=\"56.259\"\r\n                width=\"90.14\"\r\n                height=\"261.554\"\r\n                transform=\"matrix(-0.7071 -0.7071 0.7071 -0.7071 141.551 432.7058)\"\r\n              />\r\n            </svg> ")], 8
           /* PROPS */
           , _hoisted_1)];
         }),
@@ -3002,7 +2965,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": "mb-6"
           }, null, 8
           /* PROPS */
-          , ["field"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_loading_view, {
+          , ["field"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_loading_view, {
             loading: $data.loading
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -3028,7 +2991,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 _: 1
                 /* STABLE */
 
-              }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+              }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
                 dusk: "cancel-attach-button",
                 type: "button",
                 onClick: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
@@ -3047,7 +3010,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 form: $props.field.attribute
               }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__("Attach Resource")), 9
               /* TEXT, PROPS */
-              , _hoisted_11)])])];
+              , _hoisted_6)])])];
             }),
             _: 1
             /* STABLE */
@@ -3056,7 +3019,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           /* PROPS */
           , ["loading"])])], 40
           /* PROPS, HYDRATE_EVENTS */
-          , _hoisted_7)];
+          , _hoisted_2)];
         }),
         _: 1
         /* STABLE */
