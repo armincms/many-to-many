@@ -2,9 +2,10 @@
 
 namespace Armincms\Fields;
 
-use Illuminate\Support\ServiceProvider;
-use Laravel\Nova\Events\ServingNova;
 use Laravel\Nova\Nova;
+use Laravel\Nova\Events\ServingNova;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\ServiceProvider;
 
 class FieldServiceProvider extends ServiceProvider
 {
@@ -36,10 +37,15 @@ class FieldServiceProvider extends ServiceProvider
             return;
         }
 
-        \Route::middleware(['nova'])
+        Route::middleware(['nova'])
                 ->prefix('nova-api/armincms') 
                 ->namespace(__NAMESPACE__.'\\Http\\Controllers')
                 ->group(__DIR__.'/../routes/api.php');
+
+        // Route::middleware(['nova', Authorize::class])
+        // ->prefix('nova-vendor/armincms')
+        // ->namespace(__NAMESPACE__.'\\Http\\Controllers')
+        // ->group(__DIR__.'/../routes/api.php');
     }
 
     /**

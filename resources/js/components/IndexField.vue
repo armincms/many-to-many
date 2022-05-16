@@ -1,27 +1,31 @@
-<template>  
-	<span>
-      <template v-if="field.value && field.value.length">
-        <router-link 
-          v-for="(resource, index) in field.value"
-          :key="index"
-          :to="{
-            name: 'detail',
-            params: {
-              resourceName: field.resourceName,
-              resourceId: resource.id,
-            },
-          }"
-          class="no-underline font-bold dim text-primary"
-        >
-          {{ resource.text }} {{ field.value.length - index - 1 ? ' , ' : ''  }}
-        </router-link>  
-      </template>
-      <p v-else slote="value">&mdash;</p>
-    </span> 
+<template>
+  <span>
+    <template v-if="field.value && field.value.length">
+      <Link
+        v-for="(resource, index) in field.value"
+        :component="'detail'"
+        :key="index"
+        :href="`/nova/resources/${field.resourceName}/${resource.id}`"
+        :data="{
+          resourceName: field.resourceName,
+          resourceId: resource.id,
+        }"
+        class="no-underline font-bold dim text-primary"
+      >
+        {{ resource.text }} {{ field.value.length - index - 1 ? " , " : "" }}
+      </Link>
+
+      
+    </template>
+    <!-- <template v-else><p #value >&mdash;</p></template> -->
+  </span>
 </template>
 
 <script>
+import { Link } from "@inertiajs/inertia-vue3";
 export default {
-    props: ['resourceName', 'field'],  
-}
+  props: ["resourceName", "field"],
+
+  components: {Link}
+};
 </script>
