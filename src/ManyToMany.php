@@ -463,7 +463,7 @@ abstract class ManyToMany extends Field
      *
      * @return array
      */
-    public function jsonSerialize()
+    public function jsonSerialize() :array
     {
         return array_merge([
             'belongsToManyRelationship' => $this->manyToManyRelationship,
