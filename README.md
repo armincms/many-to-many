@@ -59,6 +59,25 @@ To search relation value instead of select it; you can use the `searchable` meth
 ## Pivots 
 For customizing the pivot columns when attaching a resource you can use the `pivots` method of the field. then define your custom pivot fields with the `fields` method. now, when attaching a resource; a Modal that contains the pivot fields will be displayed to you.
 
+In addition to the pivot columns, the pivot table should have its own `id` column which must be mentioned in the model definition.
+
+```php
+<?php
+namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+
+class Role extends Model
+{
+    /**
+     * The users that belong to the role.
+     */
+    public function users()
+    {
+        return $this->belongsToMany(User::class)->withPivot('id', 'active', 'created_by');;
+    }
+}
+```
+
 
 ```  
   use Armincms\Fields\BelongsToMany;  
