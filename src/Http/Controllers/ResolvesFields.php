@@ -17,7 +17,7 @@ trait ResolvesFields
     public function fields(NovaRequest $request, $resource)
     {  
         $fields = $this->resolvePivotFields(
-            $request, $resource, $request->relatedResource
+            $request, $resource, $request->field
         );
 
         if($request->isUpdateOrUpdateAttachedRequest()) {
@@ -33,7 +33,7 @@ trait ResolvesFields
                         $relatedClass = Nova::resourceForKey($request->relatedResource);
 
                         $relatedResource = new $relatedClass(
-                            $this->pivotModel($request, $resource, $request->relatedResource)
+                            $this->pivotModel($request, $resource, $request->field)
                         );
 
                         $field->resolveForDisplay($relatedResource); 
@@ -95,7 +95,7 @@ trait ResolvesFields
      */
     public function pivotFieldsFor($request, $resource)
     {
-        $field = $this->relatedFieldFor($request, $resource, $request->relatedResource); 
+        $field = $this->relatedFieldFor($request, $resource, $request->field); 
 
         if($field && isset($field->fieldsCallback)) {
             return FieldCollection::make(array_values(
