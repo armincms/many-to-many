@@ -403,7 +403,7 @@ export default {
   computed: {
     filteredResources() {
       return this.availableResources.filter((item) => {
-        return this.tag.length === 0 || item.text.match(this.tag);
+        return this.tag.length === 0 || item.text.toLowerCase().match(this.tag.toLowerCase());
       });
     },
     /**

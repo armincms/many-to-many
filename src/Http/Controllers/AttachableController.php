@@ -38,7 +38,7 @@ class AttachableController extends Controller
                             'text'  => $key,
                             'attached' => $attachedResources->contains($key),
                         ], $field->formatAttachableResource($request, $resource)); 
-                    })->sortBy('display', SORT_NATURAL | SORT_FLAG_CASE)->values();
+                    })->sortBy('text', SORT_NATURAL | SORT_FLAG_CASE)->values();
     }
 
     /**
