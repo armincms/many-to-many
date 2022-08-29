@@ -7,7 +7,7 @@ use Laravel\Nova\Events\ServingNova;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
-class FieldServiceProvider extends ServiceProvider
+class ManyToManyServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
