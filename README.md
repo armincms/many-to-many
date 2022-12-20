@@ -9,7 +9,9 @@ A Laravel Nova field for polymorphic and non-polymorphic `ManyToMany` relationsh
 * [Pivots](#pivots)          
 * [Duplicate Attachment](#duplicate-attachment)          
 * [Polymorphic Relation](#polymorphic-relation)          
-* [Fill Using](#fill-using)          
+* [Fill Using](#fill-using)
+* [Filter Available Resources](#filter-available-resources)
+        
 
 
 ## Features
@@ -87,10 +89,10 @@ class Role extends Model
   /**
    * Get the fields displayed by the resource.
    *
-   * @param  \Illuminate\Http\Request  $request
+   * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
    * @return array
    */
-  public function fields(Request $request)
+  public function fields(NovaRequest $request)
   {
     return [
       BelongsToMany::make(__("Label"), 'relationName', RelatedResource::class)
@@ -119,10 +121,10 @@ You can use the `duplicate` feature for repetitively attach a resource to anothe
   /**
    * Get the fields displayed by the resource.
    *
-   * @param  \Illuminate\Http\Request  $request
+   * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
    * @return array
    */
-  public function fields(Request $request)
+  public function fields(NovaRequest $request)
   {
     return [
       BelongsToMany::make(__("Label"), 'relationName', RelatedResource::class)
@@ -149,10 +151,10 @@ Using for the polymorphic relationships is like non-polymorphic. follow the exam
   /**
    * Get the fields displayed by the resource.
    *
-   * @param  \Illuminate\Http\Request  $request
+   * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
    * @return array
    */
-  public function fields(Request $request)
+  public function fields(NovaRequest $request)
   {
     return [
       MorphToMany::make(__("Label"), 'relationName', RelatedResource::class)
@@ -179,10 +181,10 @@ or
   /**
    * Get the fields displayed by the resource.
    *
-   * @param  \Illuminate\Http\Request  $request
+   * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
    * @return array
    */
-  public function fields(Request $request)
+  public function fields(NovaRequest $request)
   {
     return [
       MorphedByMany::make(__("Label"), 'relationName', RelatedResource::class)
@@ -211,4 +213,27 @@ Be careful; the "fillUsing" method applies to each attachment. see the following
 
       return $pivots;
   }), 
+```
+
+## Filter Available Resources
+You can use `withAttachableFilters` to add filters to return attachable resources based on filtered attributes. See the following example:
+
+```
+  use Armincms\Fields\MorphToMany;  
+  
+
+  
+  /**
+   * Get the fields displayed by the resource.
+   *
+   * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+   * @return array
+   */
+  public function fields(NovaRequest $request)
+  {
+    return [
+      MorphToMany::make(__("Label"), 'relationName', RelatedResource::class)
+          ->withAttachableFilters(['attribute1', 'value1', 'attribute2', 'value2']),
+    ];
+  }
 ```
