@@ -2,19 +2,21 @@
 
 namespace Armincms\Fields;
 
+use Laravel\Nova\Nova;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Field;
+use Laravel\Nova\TrashedStatus;
+use Illuminate\Support\Facades\Log;
+use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\DetachesPivotModels;
+use Laravel\Nova\Fields\SupportsDependentFields;
 use Laravel\Nova\Fields\ResourceRelationshipGuesser;
 use Laravel\Nova\Fields\FormatsRelatableDisplayValues;
-use Laravel\Nova\TrashedStatus;
-use Illuminate\Support\Str;
-use Laravel\Nova\Nova;
 
 abstract class ManyToMany extends Field
 {
-    use DetachesPivotModels, FormatsRelatableDisplayValues;
+    use DetachesPivotModels, FormatsRelatableDisplayValues, SupportsDependentFields;
 
     /**
      * The field's component.
@@ -333,10 +335,47 @@ abstract class ManyToMany extends Field
                     $request, $modelQuery, $request->search, [], [],
                     TrashedStatus::fromBoolean($withTrashed)
                  );
+        if ($request->input('filters')) {
+            $query = $this->filterAttachableQuery($request, $query);
+        }
 
         return $query->tap(function ($query) use ($request, $model) {
             forward_static_call($this->attachableQueryCallable($request, $model), $request, $query);
         });
+        
+    }
+
+    /**
+     * Filters attachable query for the field.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+
+
+    public function filterAttachableQuery($request, $query) {
+        $filters = json_decode($request->input('filters'), true);
+        if (!count($filters)) {
+            return $query;
+        }
+
+        foreach($filters as $attribute => $value) {
+            return $query->where($attribute, $value);
+        }
+
+        return $query;
+        
+    }
+
+    /**
+     * Sets filters for the field.
+     *
+     * @param  array  $filter
+     */
+
+    public function withAttachableFilters(array $filters) {
+
+        return $this->withMeta(['attachableFilters' => $filters]);
     }
 
     /**
