@@ -215,8 +215,8 @@ Be careful; the "fillUsing" method applies to each attachment. see the following
   }), 
 ```
 
-## Filter Available Resources
-You can use `withAttachableFilters` to add filters to return attachable resources based on filtered attributes. See the following example:
+## Filter Related Resources
+You can use `withAttachableFilters` to add filters to get related resource options based on related resource attributes. See the following example:
 
 ```
   use Armincms\Fields\MorphToMany;  
