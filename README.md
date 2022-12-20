@@ -10,7 +10,7 @@ A Laravel Nova field for polymorphic and non-polymorphic `ManyToMany` relationsh
 * [Duplicate Attachment](#duplicate-attachment)          
 * [Polymorphic Relation](#polymorphic-relation)          
 * [Fill Using](#fill-using)
-* [Filter Available Resources](#filter-available-resources)
+* [Filter Related Resources](#filter-related-resources)
         
 
 
