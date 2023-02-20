@@ -356,7 +356,7 @@ abstract class ManyToMany extends Field
 
 
     public function filterAttachableQuery($request, $query) {
-        $filters = $request->input('filters');
+        $filters = json_decode($request->input('filters'), true);
         if (!count($filters)) {
             return $query;
         }
