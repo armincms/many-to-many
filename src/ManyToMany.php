@@ -191,8 +191,10 @@ abstract class ManyToMany extends Field
 
                 $detaching = $this->mergeDetachments($model, $authorized);
 
-                $relationship->wherePivotIn('id', $detaching->pluck('pivotId')->all())
-                            ->detach($detaching->pluck('id')->all());
+                if (! $model->wasRecentlyCreated) {
+                    $relationship->wherePivotIn('id', $detaching->pluck('pivotId')->all())
+                        ->detach($detaching->pluck('id')->all());
+                }
 
                 if(! $this->duplicate) {
                     $attaching = $this->removeDuplicateAttachments($model, $attaching)

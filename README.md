@@ -233,7 +233,7 @@ You can use `withAttachableFilters` to add filters to get related resource optio
   {
     return [
       MorphToMany::make(__("Label"), 'relationName', RelatedResource::class)
-          ->withAttachableFilters(['attribute1', 'value1', 'attribute2', 'value2']),
+          ->withAttachableFilters(['attribute1' => 'value1', 'attribute2' => 'value2']),
     ];
   }
 ```
